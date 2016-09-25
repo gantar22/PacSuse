@@ -1,0 +1,35 @@
+import javax.swing.*;
+import java.awt.*;
+import java.util.*;
+import jxl.*;
+//package com.pacSuse;
+
+public class Main{
+Ludus myInput;
+Iris myIris;
+Yggdrasil myBoard;
+ArrayList<Draugr> enemies;
+
+public static void main(String args[]){
+ArrayList<Draugr> enemies = new ArrayList<Draugr>();
+Ludus myInput = new Ludus();
+Iris myIris = new Iris(enemies);
+Yggdrasil myBoard = new Yggdrasil();
+Broki myBroki = new Broki(myInput, myIris, myBoard, enemies);
+Main game = new Main();
+game.setFrame(myInput, myIris);
+myBroki.init();
+myBroki.start();
+}
+
+public void setFrame(Ludus myInput, Iris myIris){
+JFrame frame = new JFrame();
+frame.add(myInput);
+frame.add(myIris);
+frame.setSize(400,400);
+frame.setVisible(true);
+frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+frame.addKeyListener(myInput);
+}
+
+}

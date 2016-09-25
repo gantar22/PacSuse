@@ -1,0 +1,98 @@
+import java.awt.*;
+import javax.swing.*;
+import java.awt.image.*;
+import java.io.*;
+import javax.imageio.ImageIO;
+import java.util.*;
+package com.pacSuse;
+
+public class Iris extends JPanel{
+Point susePos;
+BufferedImage susPNG;
+File openSus;
+File closedSus;
+File gantarFile;
+boolean openState;
+BufferedImage openImage;
+BufferedImage closedImage;
+ArrayList<Rectangle> board;
+ArrayList<Rectangle> pills;
+int score;
+ArrayList<Draugr> enemies;
+boolean profilesInited;
+BufferedImage gantar;
+
+public Iris(ArrayList<Draugr> enemies){
+profilesInited = false;
+this.enemies = enemies;
+susePos = new Point(50,50);
+setLayout(new FlowLayout());
+openSus = new File("/home/gantar/Documents/com/pacSuse/texturePack/pacSusOpen.png");
+closedSus = new File("/home/gantar/Documents/com/pacSuse/texturePack/pacSusClosed.png");
+gantarFile = new File("/home/gantar/Documents/com/pacSuse/texturePack/draugr.png");
+try{
+gantar =  ImageIO.read(gantarFile);
+openImage = ImageIO.read(openSus);
+closedImage = ImageIO.read(closedSus);
+
+} catch(IOException e){}
+susPNG = openImage;
+openState = true;
+board = new ArrayList<Rectangle>();
+pills = new ArrayList<Rectangle>();
+score = 0;
+}
+
+@Override
+public void paintComponent(Graphics g){
+	super.paintComponent(g);
+	int enemyCounter = 0;
+	System.out.println("You got painted!");
+	Graphics2D g2 = (Graphics2D)g;
+
+	g2.setColor(Color.black);
+	g2.fillRect(0,0,100000,100000);	
+	g2.setColor(Color.red);
+	for(Rectangle z : board){
+		g2.drawRect(z.x,z.y,z.width,z.height);
+	}
+	for(Rectangle z : pills){
+		g2.drawRect(z.x,z.y,z.width,z.height);
+	}
+	g2.setColor(Color.white);
+	g2.drawString(Integer.toString(score),10,10);
+	g2.drawImage(susPNG, susePos.x, susePos.y,null);
+	for(Draugr d : enemies){
+		enemyCounter++;
+		switch(enemyCounter){
+	
+				case 1: g2.drawImage(gantar,d.pos().x,d.pos().y,null);
+			}	
+	}
+	}
+
+
+public void setSusePos(Point pos){
+	 susePos = pos;
+}
+public void setBoard(ArrayList<Rectangle> b){
+	board = b;
+}
+public void setPills(ArrayList<Rectangle> p){
+	pills = p;
+}
+public void toggleMouth(){
+	if(openState){
+		susPNG = closedImage;
+		openState = false;
+	} else {
+		susPNG = openImage;
+		openState = true;
+	}
+	
+}
+public void setScore(int points){
+	score = points;
+}
+
+}

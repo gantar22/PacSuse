@@ -1,0 +1,1 @@
+In my senior year of highschool I got bored and decided to make Pac-man in Java. I made all of the assets out of pictures of my friends in edited with "gimp." It was a lot of work, and I learned a lot of things the hard way. In the end I was happy with it so I moved on to more sophisticated, polished, and organized coding projects.
